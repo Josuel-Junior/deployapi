@@ -41,7 +41,7 @@ public class Eletronico {
 	
 	@Enumerated(EnumType.STRING)
 	private Tipo tipo;
-	private String quantidade;
+	private int quantidade;
 	
 	@Enumerated(EnumType.STRING)
 	private Marca marca;

@@ -10,6 +10,8 @@ import com.eletronicos.jfctecnologia.eletronico.DadosCadastroEletronico;
 import com.eletronicos.jfctecnologia.eletronico.Eletronico;
 import com.eletronicos.jfctecnologia.eletronico.EletronicoRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/eletronicos")
 public class EletronicosController {
@@ -18,7 +20,7 @@ public class EletronicosController {
 	private EletronicoRepository repository;
 	
 	@PostMapping
-	public void cadastrar(@RequestBody DadosCadastroEletronico dados) {
+	public void cadastrar(@RequestBody @Valid DadosCadastroEletronico dados) {
 		
 		
 		repository.save(new Eletronico(dados));
