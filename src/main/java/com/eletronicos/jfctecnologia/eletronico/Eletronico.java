@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,4 +46,19 @@ public class Eletronico {
 	
 	@Enumerated(EnumType.STRING)
 	private Marca marca;
+
+	public void atualizarInformações(@Valid DadosAtualizarEletronico dados) {
+		
+		if(dados.nome() != null) {
+			this.nome = dados.nome();
+		}
+		if(dados.tipo() != null) {
+			this.tipo = dados.tipo();
+		}
+		if(dados.marca() != null) {
+			this.marca = dados.marca();
+		}
+		
+		
+	}
 }
