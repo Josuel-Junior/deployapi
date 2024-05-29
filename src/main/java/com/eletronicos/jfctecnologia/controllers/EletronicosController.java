@@ -1,7 +1,9 @@
 package com.eletronicos.jfctecnologia.controllers;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +38,7 @@ public class EletronicosController {
 	@GetMapping
 	public List<DadoListagemEletronicos> listar (){
 		
-		return repository.findAll().stream().map(DadoListagemEletronicos::new).toList();
+		return repository.findAllByAtivoTrue().stream().map(DadoListagemEletronicos::new).toList();
 	}
 	
 	@PutMapping
@@ -47,5 +49,21 @@ public class EletronicosController {
 		eletronico.atualizarInformações(dados);
 		
 	}
+	
+	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public void deletar(@PathVariable Long id) {
+		repository.deleteById(id);
+	}
+	
+	@DeleteMapping("inativar/{id}")
+	@Transactional
+	public void inativar(@PathVariable Long id) {
+		var eletronico = repository.getReferenceById(id);
+		
+		eletronico.inativar();
+	}
+	
 
 }

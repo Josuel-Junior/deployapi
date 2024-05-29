@@ -27,7 +27,7 @@ import lombok.Setter;
 public class Eletronico {
 
 	public Eletronico(DadosCadastroEletronico dados) {
-		
+		this.ativo = true;
 		this.nome = dados.nome();
 		this.tipo = dados.tipo();
 		this.quantidade = dados.quantidade();
@@ -46,6 +46,8 @@ public class Eletronico {
 	
 	@Enumerated(EnumType.STRING)
 	private Marca marca;
+	
+	private Boolean ativo;
 
 	public void atualizarInformações(@Valid DadosAtualizarEletronico dados) {
 		
@@ -60,5 +62,9 @@ public class Eletronico {
 		}
 		
 		
+	}
+
+	public void inativar() {
+		this.ativo = false;
 	}
 }
