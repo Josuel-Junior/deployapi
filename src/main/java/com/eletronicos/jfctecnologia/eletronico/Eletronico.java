@@ -67,4 +67,9 @@ public class Eletronico {
 	public void inativar() {
 		this.ativo = false;
 	}
+
+	public void reativar() {
+		this.ativo = true;
+		
+	}
 }
