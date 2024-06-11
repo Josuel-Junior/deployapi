@@ -14,7 +14,7 @@ import usuarios.DadosAutenticacao;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("./login")
+@RequestMapping("/login")
 public class AutenticacaoController {
 
 	@Autowired
