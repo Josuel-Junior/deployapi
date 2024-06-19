@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import usuarios.DadosAutenticacao;
+import com.eletronicos.jfctecnologia.usuarios.DadosAutenticacao;
 
 import jakarta.validation.Valid;
 
@@ -23,15 +23,14 @@ public class AutenticacaoController {
 	@PostMapping
 	public ResponseEntity<?> efetuarLogin (@RequestBody @Valid DadosAutenticacao dados){
 		
+		
 		var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
 		
-	
-		return ResponseEntity.ok().build();
-
 		
-//		var autenticacao = manager.authenticate(token);
-//		
-//		return ResponseEntity.ok().build();
+	    var autenticacao = manager.authenticate(token);
+	
+		
+		return ResponseEntity.ok().build();
 		
 	}
 	

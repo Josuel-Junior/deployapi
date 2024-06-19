@@ -1,4 +1,4 @@
-package usuarios;
+package com.eletronicos.jfctecnologia.usuarios;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
