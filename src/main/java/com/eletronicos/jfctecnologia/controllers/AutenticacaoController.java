@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eletronicos.jfctecnologia.eletronico.infra.TokenService;
 import com.eletronicos.jfctecnologia.usuarios.DadosAutenticacao;
+import com.eletronicos.jfctecnologia.usuarios.Usuario;
 
 import jakarta.validation.Valid;
 
@@ -19,6 +21,9 @@ public class AutenticacaoController {
 
 	@Autowired
 	private AuthenticationManager manager;
+	
+	@Autowired
+	private TokenService tokenService;
 	
 	@PostMapping
 	public ResponseEntity<?> efetuarLogin (@RequestBody @Valid DadosAutenticacao dados){
@@ -30,7 +35,7 @@ public class AutenticacaoController {
 	    var autenticacao = manager.authenticate(token);
 	
 		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(tokenService.gerarToken((Usuario) autenticacao.getPrincipal()));
 		
 	}
 	
