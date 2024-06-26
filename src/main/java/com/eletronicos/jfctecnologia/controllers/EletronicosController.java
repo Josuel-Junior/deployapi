@@ -46,6 +46,8 @@ public class EletronicosController {
 
 	@GetMapping
 	public ResponseEntity<List<DadoListagemEletronicos>> listar() {
+		
+		
 
 		var lista = repository.findAllByAtivoTrue().stream().map(DadoListagemEletronicos::new).toList();
 
