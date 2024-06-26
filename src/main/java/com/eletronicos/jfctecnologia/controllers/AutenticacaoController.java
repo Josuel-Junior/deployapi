@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eletronicos.jfctecnologia.eletronico.infra.TokenService;
+import com.eletronicos.jfctecnologia.eletronico.infra.DadostokenJWT;
 import com.eletronicos.jfctecnologia.usuarios.DadosAutenticacao;
 import com.eletronicos.jfctecnologia.usuarios.Usuario;
 
@@ -34,8 +35,9 @@ public class AutenticacaoController {
 		
 	    var autenticacao = manager.authenticate(token);
 	
-		
-		return ResponseEntity.ok(tokenService.gerarToken((Usuario) autenticacao.getPrincipal()));
+		var tokenJWT = tokenService.gerarToken((Usuario) autenticacao.getPrincipal());
+	    
+		return ResponseEntity.ok(new DadostokenJWT(tokenJWT));
 		
 	}
 	
