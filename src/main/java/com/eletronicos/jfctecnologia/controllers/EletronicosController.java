@@ -20,6 +20,7 @@ import com.eletronicos.jfctecnologia.eletronico.DadosDetalhamentoEletronicos;
 import com.eletronicos.jfctecnologia.eletronico.Eletronico;
 import com.eletronicos.jfctecnologia.eletronico.EletronicoRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -30,6 +31,7 @@ public class EletronicosController {
 	@Autowired
 	private EletronicoRepository repository;
 
+	@Operation(summary = "Salvar", description = "Metodo que salvar um registro", tags = "Salvar")
 	@PostMapping
 	@Transactional
 	public ResponseEntity<DadosDetalhamentoEletronicos> cadastrar(@RequestBody @Valid DadosCadastroEletronico dados,
@@ -44,6 +46,7 @@ public class EletronicosController {
 		return ResponseEntity.created(uri).body(new DadosDetalhamentoEletronicos(eletronico));
 	}
 
+	@Operation(summary = "Listar todos", description = "Metodo que lista todos os registros", tags = "Listar")
 	@GetMapping
 	public ResponseEntity<List<DadoListagemEletronicos>> listar() {
 		
@@ -55,6 +58,7 @@ public class EletronicosController {
 
 	}
 
+	@Operation(summary = "Atualizar", description = "Metodo que atualiza registro", tags = "Atualizar")
 	@PutMapping
 	@Transactional
 	public ResponseEntity<DadosDetalhamentoEletronicos> atualizar(@RequestBody @Valid DadosAtualizarEletronico dados) {
@@ -66,6 +70,7 @@ public class EletronicosController {
 
 	}
 
+	@Operation(summary = "Deletar", description = "Metodo que deleta registro", tags = "Deletar")
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<Void> deletar(@PathVariable Long id) {
@@ -74,6 +79,7 @@ public class EletronicosController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@Operation(summary = "Inativar", description = "Metodo que inativa registro", tags = "Inativar")
 	@DeleteMapping("inativar/{id}")
 	@Transactional
 	public ResponseEntity<Void> inativar(@PathVariable Long id) {
@@ -84,6 +90,7 @@ public class EletronicosController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@Operation(summary = "Busca por ID", description = "Metodo que retorna um registro pelo ID", tags = "Buscar por ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<DadosDetalhamentoEletronicos> detalhar(@PathVariable Long id) {
 
@@ -93,6 +100,7 @@ public class EletronicosController {
 
 	}
 
+	@Operation(summary = "Reativar", description = "Metodo que ativa registro inativado", tags = "Ativar")
 	@PutMapping("reativar/{id}")
 	@Transactional
 	public ResponseEntity<Void> reativar(@PathVariable Long id) {

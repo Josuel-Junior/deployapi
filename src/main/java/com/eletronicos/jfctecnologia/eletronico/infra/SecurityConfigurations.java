@@ -27,6 +27,7 @@ public class SecurityConfigurations {
 	                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	                .and().authorizeHttpRequests()
 	                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+	                .requestMatchers(AUTH_WHITELIST).permitAll()
 	                .anyRequest().authenticated()
 	                .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 	                .build();
@@ -41,4 +42,19 @@ public class SecurityConfigurations {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	
+	 private static final String[] AUTH_WHITELIST = {
+	           
+	            "/v2/api-docs",
+	            "/swagger-resources",
+	            "/swagger-resources/**",
+	            "/configuration/ui",
+	            "/configuration/security",
+	            "/swagger-ui.html",
+	            "/webjars/**",
+	            "/v3/api-docs/**",
+	            "/swagger-ui/**"
+	    };
+	
 }
