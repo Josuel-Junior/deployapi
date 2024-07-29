@@ -1,0 +1,50 @@
+version: '3.7'
+services:
+  db:
+    image: mysql:8.0.31
+    container_name: mysql_container
+    volumes:
+      - dbbase:/var/lib/mysql
+    ports:
+      - "3307:3306" # Porta interna 3306, porta externa 3307
+    environment:
+      MYSQL_ROOT_PASSWORD: Ch545856.
+      MYSQL_DATABASE: eletronico_api
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin_container
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: Ch545856.
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database-1.c926e8gm2vwg.us-east-1.rds.amazonaws.com:3306/eletronico_api
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: Ch545856.
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+volumes:
+  dbbase:
+
+networks:
+  app-network:
+    driver: bridge
